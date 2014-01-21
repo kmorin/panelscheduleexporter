@@ -7,6 +7,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
+using System.Text.RegularExpressions;
 
 namespace PanelScheduleExporter
 {
@@ -130,8 +131,32 @@ namespace PanelScheduleExporter
                     {
                         cc = jj; //set excel column equal to schedule column
                         string s = m_psView.GetCellText(sectionType, ii, jj);
-                        MySheet.Cells[rr,cc] = s;
+
+                        int value = 0;
+                        Excel.Range range = MySheet.Cells[rr, cc] as Excel.Range;
+                        range.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft; //Align cells left.
                         
+                        // Format cells for VA
+                        if (Regex.Match(s,@"[0-9] VA").Success) //Regex to match "## VA" cells
+                        {
+                            s = s.Remove(s.Length - 3);                            
+                            int.TryParse(s, out value);
+                            
+                            range.NumberFormat = "0 VA";                            
+                            MySheet.Cells[rr, cc] = value;                            
+                        }
+                        else if (Regex.Match(s, @"[0-9] A").Success) //Regex to match "## A" cells
+                        {
+                            s = s.Remove(s.Length - 2);
+                            int.TryParse(s, out value);
+
+                            range.NumberFormat = "0 A";
+                            MySheet.Cells[rr, cc] = value;                            
+                        }
+                        else
+                        {
+                            MySheet.Cells[rr, cc] = s;                            
+                        }                        
                     }
                     catch (Exception)
                     {

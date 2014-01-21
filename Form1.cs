@@ -70,7 +70,7 @@ namespace PanelScheduleExporter
                 btnCheckNone.Enabled = false;
                 btnDirectoryPick.Enabled = false;
                 btnCancel.Visible = true;
-                lblProgress.Visible = true;
+                lblProgress.Visible = true;                
 
                 //Progress bar
                 progressBar1.Visible = true;
@@ -138,11 +138,12 @@ namespace PanelScheduleExporter
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            lblProgress.Visible = true; 
+        {            
             foreach (object o in checkedListBox1.CheckedItems)
             {
-                lblProgress.Text = string.Format("{0} of {1} Panels processed", intProgress, checkedListBox1.CheckedItems.Count.ToString());
+                string txt = string.Format("{0} of {1} Panels processed", intProgress, checkedListBox1.CheckedItems.Count.ToString());
+                this.Invoke((MethodInvoker)delegate { lblProgress.Text = txt; });
+                
                 //PanelScheduleExport._schedulesToExport.Add(o as Element);
                 Translator trans = new XLSXTranslator(o as PanelScheduleView) as Translator;
                 string exported = trans.Export();
