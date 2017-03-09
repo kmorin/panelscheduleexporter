@@ -5,7 +5,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
-using Microsoft.Office.Core;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 
 namespace PanelScheduleExporter2017
 {
@@ -15,6 +16,7 @@ namespace PanelScheduleExporter2017
         private static Microsoft.Office.Interop.Excel.Workbook MyBook = null;
         private static Microsoft.Office.Interop.Excel.Application MyApp = null;
         private static Microsoft.Office.Interop.Excel.Worksheet MySheet = null;
+        private static ExcelWorksheet _ws = null;
         private int _nRows_Section;
         private int _nCols_Section;
         private int rr = 0;
@@ -31,39 +33,31 @@ namespace PanelScheduleExporter2017
         public override string Export()
         {
             //_panel = fi;
-            string assemblyName = System.Reflection.Assembly.GetExecutingAssembly().Location;
             //string excelTemplate = assemblyName.Replace("PanelSchedule.dll", "panelSchedTemplate.xlsx");
-            string newFileName = m_psView.ViewName + ".xlsx";
+            string newFileName = Path.Combine(PanelScheduleExport._exportDirectory,m_psView.ViewName + ".xlsx");
 
             try
             {
                 //Initialize excel
-                MyApp = new Microsoft.Office.Interop.Excel.Application();
-                MyApp.Visible = false;
-                //MyBook = MyApp.Workbooks.Open(excelTemplate); //Template
-                MyBook = MyApp.Workbooks.Add();
+                using (var wb = new ExcelPackage(new FileInfo(newFileName)))
+                {
+                    var ws = wb.Workbook.Worksheets.Add(m_psView.ViewName);
+                    _ws = ws;
+                    DumpPanelScheduleData();
 
-                MySheet = MyBook.Sheets[1] as Microsoft.Office.Interop.Excel.Worksheet; //Explicit cast is not required
+                    _ws.Cells.AutoFitColumns();
+                    wb.Save();
+                }
 
-                //Map Cells for individual items **
-                // HEADER //
-                /*
-                MySheet.Cells[1, 3] = "INSERT STRING HERE";     //PanelName
-                MySheet.Cells[2, 3] = "ELECTRICAL ROOM";        //Location
-                MySheet.Cells[3, 3] = "";                       //SupplyFrom
-                MySheet.Cells[4, 3] = "Surface";                //Mounting
-                MySheet.Cells[5, 3] = "NEMA 1";                 //Enclosure
-                */
-                // CIRCUITS //
 
                 //Implement dump to excel for testing
-                DumpPanelScheduleData();
+                //DumpPanelScheduleData();
 
                 //Resize cells
-                MySheet.Columns.AutoFit();
+                //MySheet.Columns.AutoFit();
                 //Save out excel to new file            
-                MyBook.SaveAs(Path.Combine(PanelScheduleExport._exportDirectory, newFileName));
-                MyBook.Close();
+                //MyBook.SaveAs(Path.Combine(PanelScheduleExport._exportDirectory, newFileName));
+                //MyBook.Close();
 
                 //Working On portion (does nothing)??
                 PanelScheduleData psData = m_psView.GetTableData();
@@ -133,29 +127,33 @@ namespace PanelScheduleExporter2017
                         cc = jj; //set excel column equal to schedule column
                         _s = m_psView.GetCellText(sectionType, ii, jj);  
                         int value = 0;
-                        Microsoft.Office.Interop.Excel.Range range = MySheet.Cells[rr, cc] as Microsoft.Office.Interop.Excel.Range;
-                        range.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft; //Align cells left.
-                        
+                        //Microsoft.Office.Interop.Excel.Range range = MySheet.Cells[rr, cc] as Microsoft.Office.Interop.Excel.Range;
+                        var range = _ws.Cells[rr, cc];
+                        //range.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft; //Align cells left.
+                        range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;                        
                         // Format cells for VA
                         if (Regex.Match(_s,@"[0-9] VA").Success) //Regex to match "## VA" cells
                         {
                             _s = _s.Remove(_s.Length - 3);                            
                             int.TryParse(_s, out value);
                             
-                            range.NumberFormat = "0 VA";                            
-                            MySheet.Cells[rr, cc] = value;                            
+                            range.Style.Numberformat.Format = "0 VA";                            
+                            //MySheet.Cells[rr, cc] = value;                            
+                            range.Value = value;
                         }
                         else if (Regex.Match(_s, @"[0-9] A").Success) //Regex to match "## A" cells
                         {
                             _s = _s.Remove(_s.Length - 2);
                             int.TryParse(_s, out value);
 
-                            range.NumberFormat = "0 A";
-                            MySheet.Cells[rr, cc] = value;                            
+                            range.Style.Numberformat.Format = "0 A";
+                            //MySheet.Cells[rr, cc] = value;                            
+                            range.Value = value;
                         }
                         else
                         {
-                            MySheet.Cells[rr, cc] = _s;                            
+                            //MySheet.Cells[rr, cc] = _s;       
+                            range.Value = _s;
                         }                        
                     }
                     catch (Exception)
