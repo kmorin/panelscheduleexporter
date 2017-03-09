@@ -108,6 +108,11 @@
     <Compile Include="XLSXTranslator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="icons\panelScheduleExport.png" />
+    <EmbeddedResource Include="icons\panelScheduleExport_16.png" />
+    <Content Include="LICENSE.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="PanelScheduleExporter.addin">
       <SubType>Designer</SubType>
     </Content>
@@ -143,7 +148,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(ProjectDir)bin\debug2017\PanelScheduleExporter2017.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\PanelScheduleExporter.bundle\Contents\2017"</PostBuildEvent>
+    <PostBuildEvent>"Z:\DEV\panelschedexport\packages\ILMerge.2.14.1208\tools\ILMerge.exe" /log:log.txt /lib:"C:\Program Files\Autodesk\Revit 2017" /out:$(TargetDir)PSE.dll $(TargetPath) $(TargetDir)EPPlus.dll</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
