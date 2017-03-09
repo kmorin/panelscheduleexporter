@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{75EDDCDC-5717-44E3-935F-A5520211F7FD}</ProjectGuid>
+    <ProjectGuid>{6C9EA3B4-A3D5-444A-86B8-219249EC9FAB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PanelScheduleExporter2015</RootNamespace>
