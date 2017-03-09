@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>  
+  <AddIn Type="Application">
+    <Name>Application PanelScheduleExporter</Name>
+    <Assembly>PSE.dll</Assembly>
+    <FullClassName>PanelScheduleExporter2016.App</FullClassName>
+    <ClientId>7CB61285-6DF6-46F4-A036-F9173CA546DB</ClientId>
+    <VendorId>KTM</VendorId>
+    <VendorDescription>Kyle T. Morin, http://kylemorin.co</VendorDescription>
+  </AddIn>
+</RevitAddIns>
