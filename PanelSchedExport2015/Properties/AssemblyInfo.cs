@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Kyle T. Morin")]
 [assembly: AssemblyProduct("PanelScheduleExporter")]
-[assembly: AssemblyCopyright("Copyright (c) 2015 Kyle T. Morin")]
+[assembly: AssemblyCopyright("Copyright (c) 2017 Kyle T. Morin")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("2015.1.27.0")]
-[assembly: AssemblyFileVersion("2015.1.27.0")]
+[assembly: AssemblyVersion("2017.1.27.0")]
+[assembly: AssemblyFileVersion("2017.1.27.0")]
