@@ -26,7 +26,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
 using Autodesk.Revit.UI;
 
-namespace PanelScheduleExporter2015
+namespace PanelScheduleExporter2016
 {
     /// <summary>
     /// Translate the panel schedule view data from Revit to HTML table.

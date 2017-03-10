@@ -26,7 +26,7 @@ using System.Text;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
 
-namespace PanelScheduleExporter2015
+namespace PanelScheduleExporter2017
 {
     /// <summary>
     /// Translate the panel schedule view data from Revit to CSV.

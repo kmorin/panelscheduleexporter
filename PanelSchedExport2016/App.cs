@@ -6,7 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Autodesk.Revit.UI;
 
-namespace PanelScheduleExporter2015
+namespace PanelScheduleExporter2016
 {
     internal class App : IExternalApplication
     {
@@ -44,7 +44,7 @@ namespace PanelScheduleExporter2015
                 string.Concat(m_iconPath, "panelScheduleExport_16.png"),
                 string.Concat(m_iconPath, "panelScheduleExport.png"),
                 Path.Combine(_path,_assemblyName+".dll"),
-                "PanelScheduleExporter2015.PanelScheduleExport",
+                "PanelScheduleExporter2016.PanelScheduleExport",
                 "Export project Panel Schedules to Exel (XLSX) files",
                 "",
                 false

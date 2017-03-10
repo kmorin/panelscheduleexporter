@@ -1,4 +1,4 @@
-﻿namespace PanelScheduleExporter2015
+﻿namespace PanelScheduleExporter2016
 {
     partial class Form1
     {

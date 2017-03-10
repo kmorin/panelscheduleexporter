@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
 
-namespace PanelScheduleExporter2015
+namespace PanelScheduleExporter2016
 {
     /// <summary>
     /// Form

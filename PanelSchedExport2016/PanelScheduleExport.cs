@@ -20,21 +20,29 @@
 // (Rights in Technical Data and Computer Software), as applicable.
 //
 
+using System;
+using System.Windows.Forms;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
 using Autodesk.Revit.UI;
-using Autodesk.Revit.UI.Selection;
 
-namespace PanelScheduleExporter2015
+namespace PanelScheduleExporter2016
 {
     /// <summary>
-    /// Create view instance for an electrical panel.
+    /// Export Panel Schedule View form Revit to CSV or HTML file.
     /// </summary>
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
     [Autodesk.Revit.Attributes.Regeneration(Autodesk.Revit.Attributes.RegenerationOption.Manual)]
     [Autodesk.Revit.Attributes.Journaling(Autodesk.Revit.Attributes.JournalingMode.NoCommandData)]
-    public class InstanceViewCreation : IExternalCommand
+    public class PanelScheduleExport : IExternalCommand
     {
+        //public static List<Element> _schedulesToExport = new List<Element>();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string _exportDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
         /// <summary>
         /// Implement this method as an external command for Revit.
         /// </summary>
@@ -55,24 +63,33 @@ namespace PanelScheduleExporter2015
             , ref string message, Autodesk.Revit.DB.ElementSet elements)
         {
             Autodesk.Revit.DB.Document doc = commandData.Application.ActiveUIDocument.Document;
+           
 
-            Reference selected = commandData.Application.ActiveUIDocument.Selection.PickObject(ObjectType.Element);
-
-            Transaction newInstanceView = new Transaction(doc, "Create instance view for an electrical panel.");
-            newInstanceView.Start();
-            PanelScheduleView instanceView = PanelScheduleView.CreateInstanceView(doc, doc.GetElement(selected).Id);
-            if (null == instanceView)
+            //Access panel for particular view [Future]
+            //FamilyInstance fi = doc.GetElement(psView.GetPanel()) as FamilyInstance;                
+            try
             {
-                newInstanceView.RollBack();
-                message = "Please select one electrical panel.";
+                Form1 window = new Form1(doc);
+                DialogResult dr = window.ShowDialog();
+
+                if (dr == DialogResult.OK)
+                {
+                    window.Dispose();
+                    TaskDialog.Show("Complete", "Export Panels Done!");
+                    return Result.Succeeded;
+                }
+                else
+                {
+                    window.Dispose();
+                    return Result.Failed;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                TaskDialog.Show("Error", ex.ToString());
                 return Result.Failed;
-            }
-            else
-            {
-                newInstanceView.Commit();
-                return Result.Succeeded;
-            }
-
+            }                        
         }
     }
 }

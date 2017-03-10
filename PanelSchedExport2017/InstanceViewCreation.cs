@@ -25,7 +25,7 @@ using Autodesk.Revit.DB.Electrical;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
 
-namespace PanelScheduleExporter2015
+namespace PanelScheduleExporter2017
 {
     /// <summary>
     /// Create view instance for an electrical panel.

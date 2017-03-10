@@ -8,7 +8,7 @@ using Autodesk.Revit.DB.Electrical;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 
-namespace PanelScheduleExporter2015
+namespace PanelScheduleExporter2016
 {
     class XLSXTranslator : Translator
     {
