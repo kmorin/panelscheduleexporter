@@ -1,0 +1,3 @@
+[submodule "revit-references"]
+	path = revit-references
+	url = ssh://git@bitbucket.org/k_morin/revit-references.git
