@@ -13,9 +13,9 @@ namespace PanelScheduleExporter2018
     class XLSXTranslator : Translator
     {
       public string _s = "";
-        private static Microsoft.Office.Interop.Excel.Workbook MyBook = null;
-        private static Microsoft.Office.Interop.Excel.Application MyApp = null;
-        private static Microsoft.Office.Interop.Excel.Worksheet MySheet = null;
+        //private static Microsoft.Office.Interop.Excel.Workbook MyBook = null;
+        //private static Microsoft.Office.Interop.Excel.Application MyApp = null;
+        //private static Microsoft.Office.Interop.Excel.Worksheet MySheet = null;
         private static ExcelWorksheet _ws = null;
         private int _nRows_Section;
         private int _nCols_Section;
@@ -60,7 +60,7 @@ namespace PanelScheduleExporter2018
                 //MyBook.Close();
 
                 //Working On portion (does nothing)??
-                PanelScheduleData psData = m_psView.GetTableData();
+                var psData = m_psView.GetTableData();
                 int numSlots = psData.NumberOfSlots;              //Number of circuits
                 int numCktRows = psData.GetNumberOfCircuitRows(); //example: 42ckt = 22 numCktRows            
 

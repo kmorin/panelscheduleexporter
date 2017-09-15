@@ -2,7 +2,7 @@
 <RevitAddIns>  
   <AddIn Type="Application">
     <Name>Application PanelScheduleExporter</Name>
-    <Assembly>PanelScheduleExporter2018.dll</Assembly>
+    <Assembly>PSE.dll</Assembly>
     <FullClassName>PanelScheduleExporter2018.App</FullClassName>
     <ClientId>7CB61285-6DF6-46F4-A036-F9173CA546DB</ClientId>
     <VendorId>KTM</VendorId>

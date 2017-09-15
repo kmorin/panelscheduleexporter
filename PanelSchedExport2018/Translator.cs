@@ -45,7 +45,7 @@ namespace PanelScheduleExporter2018
         /// <param name="nCols">the number of columns.</param>
         protected void getNumberOfRowsAndColumns(Autodesk.Revit.DB.Document doc, PanelScheduleView psView, SectionType sectionType, ref int nRows, ref int nCols)
         {
-            Transaction openSectionData = new Transaction(doc, "openSectionData");
+            var openSectionData = new Transaction(doc, "openSectionData");
             openSectionData.Start();
 
             TableSectionData sectionData = psView.GetSectionData(sectionType);

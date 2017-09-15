@@ -13,9 +13,9 @@ namespace PanelScheduleExporter2017
     class XLSXTranslator : Translator
     {
       public string _s = "";
-        private static Microsoft.Office.Interop.Excel.Workbook MyBook = null;
-        private static Microsoft.Office.Interop.Excel.Application MyApp = null;
-        private static Microsoft.Office.Interop.Excel.Worksheet MySheet = null;
+        //private static Microsoft.Office.Interop.Excel.Workbook MyBook = null;
+        //private static Microsoft.Office.Interop.Excel.Application MyApp = null;
+        //private static Microsoft.Office.Interop.Excel.Worksheet MySheet = null;
         private static ExcelWorksheet _ws = null;
         private int _nRows_Section;
         private int _nCols_Section;
