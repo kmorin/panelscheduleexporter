@@ -83,6 +83,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\source\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="App.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -99,11 +102,14 @@
     <Compile Include="Translator.cs" />
     <Compile Include="HTMLTranslator.cs" />
     <Compile Include="XLSXTranslator.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="icons\panelScheduleExport.png" />
-    <EmbeddedResource Include="icons\panelScheduleExport_16.png" />
+    <EmbeddedResource Include="..\source\icons\panelScheduleExport.png">
+      <Link>icons\panelScheduleExport.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\source\icons\panelScheduleExport_16.png">
+      <Link>icons\panelScheduleExport_16.png</Link>
+    </EmbeddedResource>
     <Content Include="LICENSE.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
