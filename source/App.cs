@@ -6,7 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Autodesk.Revit.UI;
 
-namespace PanelScheduleExporter2017
+namespace PanelScheduleExporter
 {
     internal class App : IExternalApplication
     {
@@ -44,7 +44,7 @@ namespace PanelScheduleExporter2017
                 string.Concat(m_iconPath, "panelScheduleExport_16.png"),
                 string.Concat(m_iconPath, "panelScheduleExport.png"),
                 Path.Combine(_path,_assemblyName+".dll"),
-                "PanelScheduleExporter2017.PanelScheduleExport",
+                "PanelScheduleExporter.PanelScheduleExport",
                 "Export project Panel Schedules to Exel (XLSX) files",
                 "",
                 false
@@ -122,6 +122,7 @@ namespace PanelScheduleExporter2017
                 }
 
                 m_mPushButtonData.ToolTip = toolTip;
+                m_mPushButtonData.SetContextualHelp(new ContextualHelp(ContextualHelpType.Url, "https://apps.autodesk.com/RVT/en/Detail/HelpDoc?appId=3053823727978432901&appLang=en&os=Win32_64"));
 
                 //Availability?
                 if (!string.IsNullOrEmpty(pbAvail))
@@ -131,8 +132,7 @@ namespace PanelScheduleExporter2017
 
                 //Add button to the ribbon
                 rPanel.AddItem(m_mPushButtonData);
-                ContextualHelp help = new ContextualHelp(ContextualHelpType.ChmFile, _path + "/help.htm");
-                m_mPushButtonData.SetContextualHelp(help);
+                
             }
             catch (Exception m_e)
             {

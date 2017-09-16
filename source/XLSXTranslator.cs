@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Specialized;
 using System.IO;
-using System.Text;
 using System.Text.RegularExpressions;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 
-namespace PanelScheduleExporter2018
+namespace PanelScheduleExporter
 {
     class XLSXTranslator : Translator
     {

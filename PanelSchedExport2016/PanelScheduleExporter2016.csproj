@@ -8,7 +8,7 @@
     <ProjectGuid>{75EDDCDC-5717-44E3-935F-A5520211F7FD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PanelScheduleExporter2016</RootNamespace>
+    <RootNamespace>PanelScheduleExporter</RootNamespace>
     <AssemblyName>PanelScheduleExporter2016</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -87,27 +87,47 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\source\App.cs">
+      <Link>App.cs</Link>
+    </Compile>
     <Compile Include="..\source\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="App.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="..\source\CSVTranslator.cs">
+      <Link>CSVTranslator.cs</Link>
+    </Compile>
+    <Compile Include="..\source\Form1.cs">
+      <Link>Form1.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="..\source\Form1.Designer.cs">
+      <Link>Form1.Designer.cs</Link>
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="InstanceViewCreation.cs">
-      <SubType>Code</SubType>
+    <Compile Include="..\source\HTMLTranslator.cs">
+      <Link>HTMLTranslator.cs</Link>
     </Compile>
-    <Compile Include="PanelScheduleExport.cs" />
-    <Compile Include="CSVTranslator.cs" />
-    <Compile Include="SheetImport.cs" />
-    <Compile Include="Translator.cs" />
-    <Compile Include="HTMLTranslator.cs" />
-    <Compile Include="XLSXTranslator.cs" />
+    <Compile Include="..\source\InstanceViewCreation.cs">
+      <Link>InstanceViewCreation.cs</Link>
+    </Compile>
+    <Compile Include="..\source\PanelScheduleExport.cs">
+      <Link>PanelScheduleExport.cs</Link>
+    </Compile>
+    <Compile Include="..\source\SheetImport.cs">
+      <Link>SheetImport.cs</Link>
+    </Compile>
+    <Compile Include="..\source\Translator.cs">
+      <Link>Translator.cs</Link>
+    </Compile>
+    <Compile Include="..\source\XLSXTranslator.cs">
+      <Link>XLSXTranslator.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\source\Form1.resx">
+      <Link>Form1.resx</Link>
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="..\source\icons\panelScheduleExport.png">
       <Link>icons\panelScheduleExport.png</Link>
     </EmbeddedResource>
@@ -117,16 +137,6 @@
     <Content Include="LICENSE.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="PanelScheduleExporter.addin">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="template.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="VBIDE">
@@ -140,6 +150,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\source\PanelScheduleExporter.addin">
+      <Link>PanelScheduleExporter.addin</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

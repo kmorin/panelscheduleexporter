@@ -1,39 +1,17 @@
-//
-// (C) Copyright 2003-2013 by Autodesk, Inc.
-//
-// Permission to use, copy, modify, and distribute this software in
-// object code form for any purpose and without fee is hereby granted,
-// provided that the above copyright notice appears in all copies and
-// that both that copyright notice and the limited warranty and
-// restricted rights notice below appear in all supporting
-// documentation.
-//
-// AUTODESK PROVIDES THIS PROGRAM "AS IS" AND WITH ALL FAULTS.
-// AUTODESK SPECIFICALLY DISCLAIMS ANY IMPLIED WARRANTY OF
-// MERCHANTABILITY OR FITNESS FOR A PARTICULAR USE. AUTODESK, INC.
-// DOES NOT WARRANT THAT THE OPERATION OF THE PROGRAM WILL BE
-// UNINTERRUPTED OR ERROR FREE.
-//
-// Use, duplication, or disclosure by the U.S. Government is subject to
-// restrictions set forth in FAR 52.227-19 (Commercial Computer
-// Software - Restricted Rights) and DFAR 252.227-7013(c)(1)(ii)
-// (Rights in Technical Data and Computer Software), as applicable.
-//
-
+using System.Collections.Generic;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
 using Autodesk.Revit.UI;
-using Autodesk.Revit.UI.Selection;
 
-namespace PanelScheduleExporter2017
+namespace PanelScheduleExporter
 {
     /// <summary>
-    /// Create view instance for an electrical panel.
+    /// Import the panel scheduel view to place on a sheet view.
     /// </summary>
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
     [Autodesk.Revit.Attributes.Regeneration(Autodesk.Revit.Attributes.RegenerationOption.Manual)]
     [Autodesk.Revit.Attributes.Journaling(Autodesk.Revit.Attributes.JournalingMode.NoCommandData)]
-    public class InstanceViewCreation : IExternalCommand
+    class SheetImport : IExternalCommand
     {
         /// <summary>
         /// Implement this method as an external command for Revit.
@@ -56,22 +34,43 @@ namespace PanelScheduleExporter2017
         {
             Autodesk.Revit.DB.Document doc = commandData.Application.ActiveUIDocument.Document;
 
-            Reference selected = commandData.Application.ActiveUIDocument.Selection.PickObject(ObjectType.Element);
-
-            Transaction newInstanceView = new Transaction(doc, "Create instance view for an electrical panel.");
-            newInstanceView.Start();
-            PanelScheduleView instanceView = PanelScheduleView.CreateInstanceView(doc, doc.GetElement(selected).Id);
-            if (null == instanceView)
+            // get one sheet view to place panel schedule.
+            ViewSheet sheet = doc.ActiveView as ViewSheet;
+            if (null == sheet)
             {
-                newInstanceView.RollBack();
-                message = "Please select one electrical panel.";
+                message = "please go to a sheet view.";
                 return Result.Failed;
             }
-            else
+
+            // get all PanelScheduleView instances in the Revit document.
+            FilteredElementCollector fec = new FilteredElementCollector(doc);
+            ElementClassFilter PanelScheduleViewsAreWanted = new ElementClassFilter(typeof(PanelScheduleView));
+            fec.WherePasses(PanelScheduleViewsAreWanted);
+            List<Element> psViews = fec.ToElements() as List<Element>;
+
+            Transaction placePanelScheduleOnSheet = new Transaction(doc, "placePanelScheduleOnSheet");
+            placePanelScheduleOnSheet.Start();
+
+            XYZ nextOrigin = new XYZ(0.0, 0.0, 0.0);
+            foreach (Element element in psViews)
             {
-                newInstanceView.Commit();
-                return Result.Succeeded;
+                PanelScheduleView psView = element as PanelScheduleView;
+                if (psView.IsPanelScheduleTemplate())
+                {
+                    // ignore the PanelScheduleView instance which is a template.
+                    continue;
+                }
+
+                PanelScheduleSheetInstance onSheet = PanelScheduleSheetInstance.Create(doc, psView.Id, sheet);
+                onSheet.Origin = nextOrigin;
+                BoundingBoxXYZ bbox = onSheet.get_BoundingBox(doc.ActiveView);
+                double width = bbox.Max.X - bbox.Min.X;
+                nextOrigin = new XYZ(onSheet.Origin.X + width, onSheet.Origin.Y, onSheet.Origin.Z);
             }
+
+            placePanelScheduleOnSheet.Commit();
+
+            return Result.Succeeded;
 
         }
     }

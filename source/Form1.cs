@@ -1,12 +1,13 @@
 ﻿using System;
-using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
 
-namespace PanelScheduleExporter2017
+namespace PanelScheduleExporter
 {
+    /// <inheritdoc />
     /// <summary>
     /// Form
     /// </summary>
@@ -22,8 +23,8 @@ namespace PanelScheduleExporter2017
         /// </summary>
         private int intProgress = 0;
 
+        /// <inheritdoc />
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="doc"></param>
         public Form1(Document doc)
@@ -34,15 +35,20 @@ namespace PanelScheduleExporter2017
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            var fec = new FilteredElementCollector(_doc).OfClass(typeof(PanelScheduleView));
+            if (!fec.Any())
+            {
+                MessageBox.Show("No panel schedules in project to export");
+                this.DialogResult = DialogResult.Abort;
+            }
             progressBar1.Visible = false;
 
             textBox1.Text = PanelScheduleExport._exportDirectory;            
 
-            FilteredElementCollector fec = new FilteredElementCollector(_doc).OfClass(typeof(PanelScheduleView));
             
-            foreach (Element elem in fec)
+            foreach (var elem in fec)
             {
-                PanelScheduleView psView = elem as PanelScheduleView;
+                var psView = elem as PanelScheduleView;
                 if (psView.IsPanelScheduleTemplate())
                 {
                     continue;
@@ -59,13 +65,14 @@ namespace PanelScheduleExporter2017
         {
             try
             {
+                if (this.checkedListBox1.CheckedItems.Count < 1) throw new ArgumentNullException("No Items Checked");
                 //Set buttons disabled
                 button1.Enabled = false;
                 btnCheckAll.Enabled = false;
                 btnCheckNone.Enabled = false;
                 btnDirectoryPick.Enabled = false;
                 btnCancel.Visible = true;
-                lblProgress.Visible = true;                
+                lblProgress.Visible = true;
 
                 //Progress bar
                 progressBar1.Visible = true;
@@ -74,9 +81,13 @@ namespace PanelScheduleExporter2017
                 progressBar1.Maximum = 100;
                 progressBar1.Value = 0;
                 timer1.Enabled = true;
-              DoWork();
-              //backgroundWorker1.RunWorkerAsync();
+                DoWork();
+                //backgroundWorker1.RunWorkerAsync();
 
+            }
+            catch (ArgumentNullException)
+            {
+                MessageBox.Show("No Panels selected to export.");
             }
             catch (IOException)
             {
