@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0" AutodeskProduct="Revit" AppVersion="2017.9.14.0" ProductCode="B5430283-37C2-4F82-A1BB-D646A11FEA80" Name="PanelScheduleExporter" Description="Export Panel Schedules to Excel" ProductType="Application" Icon="./Contents/icon.ico" HelpFile="http://apps.exchange.autodesk.com" OnlineDocumentation="http://apps.exchange.autodesk.com/">
+	<CompanyDetails Name="KTM" Email="kyle@kylemorin.co" />
+    <RuntimeRequirements OS="Win64" Platform="Revit" SeriesMin="R2015" SeriesMax="R2018" />
+  <Components Description="2015">
+    <RuntimeRequirements OS="Win64" Platform="Revit" SeriesMin="R2015" SeriesMax="R2015" />
+    <ComponentEntry AppName="PanelScheduleExporter" ModuleName="./Contents/2015/PanelScheduleExporter.addin" AppDescription="Panel Schedule Exporter"></ComponentEntry>
+  </Components>
+    <Components Description="2016">
+    <RuntimeRequirements OS="Win64" Platform="Revit" SeriesMin="R2016" SeriesMax="R2016" />
+    <ComponentEntry AppName="PanelScheduleExporter" ModuleName="./Contents/2016/PanelScheduleExporter.addin" AppDescription="Panel Schedule Exporter"></ComponentEntry>
+  </Components>
+    <Components Description="2017">
+    <RuntimeRequirements OS="Win64" Platform="Revit" SeriesMin="R2017" SeriesMax="R2017" />
+    <ComponentEntry AppName="PanelScheduleExporter" ModuleName="./Contents/2017/PanelScheduleExporter.addin" AppDescription="Panel Schedule Exporter"></ComponentEntry>
+  </Components>
+    <Components Description="2018">
+    <RuntimeRequirements OS="Win64" Platform="Revit" SeriesMin="R2018" SeriesMax="R2018" />
+    <ComponentEntry AppName="PanelScheduleExporter" ModuleName="./Contents/2018/PanelScheduleExporter.addin" AppDescription="Panel Schedule Exporter"></ComponentEntry>
+  </Components>
+</ApplicationPackage>
