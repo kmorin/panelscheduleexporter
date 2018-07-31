@@ -34,6 +34,21 @@ namespace PanelScheduleExporter
             //string excelTemplate = assemblyName.Replace("PanelSchedule.dll", "panelSchedTemplate.xlsx");
             string newFileName = Path.Combine(PanelScheduleExport._exportDirectory,m_psView.ViewName + ".xlsx");
 
+            var overwrite = false;
+            if (File.Exists(newFileName)) {
+                try {
+                    File.Delete(newFileName);
+                }
+                catch {
+                    try {
+                    File.Delete(newFileName);
+                    }
+                    catch {
+                        LogFailedFile(newFileName);
+                    }
+                }
+            }
+
             try
             {
                 //Initialize excel
