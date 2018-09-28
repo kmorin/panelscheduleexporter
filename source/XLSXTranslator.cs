@@ -30,11 +30,18 @@ namespace PanelScheduleExporter
 
         public override string Export()
         {
-            //_panel = fi;
-            //string excelTemplate = assemblyName.Replace("PanelSchedule.dll", "panelSchedTemplate.xlsx");
-            string newFileName = Path.Combine(PanelScheduleExport._exportDirectory,m_psView.ViewName + ".xlsx");
+      //_panel = fi;
+      //string excelTemplate = assemblyName.Replace("PanelSchedule.dll", "panelSchedTemplate.xlsx");
+#if REVIT2019
+      string viewName = m_psView.Name;
+#else
+      string viewName = m_psView.ViewName;
+#endif
+      string newFileName = Path.Combine(PanelScheduleExport._exportDirectory, viewName + ".xlsx");
 
             var overwrite = false;
+
+            // Attempt to delete the file if already exists.
             if (File.Exists(newFileName)) {
                 try {
                     File.Delete(newFileName);
@@ -45,6 +52,8 @@ namespace PanelScheduleExporter
                     }
                     catch {
                         LogFailedFile(newFileName);
+            //Failed to delete the file, so just append and integer
+            SetNewFileName(newFileName, out newFileName);
                     }
                 }
             }
@@ -54,7 +63,7 @@ namespace PanelScheduleExporter
                 //Initialize excel
                 using (var wb = new ExcelPackage(new FileInfo(newFileName)))
                 {
-                    var ws = wb.Workbook.Worksheets.Add(m_psView.ViewName);
+                    var ws = wb.Workbook.Worksheets.Add(viewName);
                     _ws = ws;
                     DumpPanelScheduleData();
 
@@ -90,8 +99,32 @@ namespace PanelScheduleExporter
                     throw new SystemException();
             }
         }
-        
-        private void DumpPanelScheduleData()
+
+    private void SetNewFileName(string inputFilename, out string newFileName)
+    {
+      //check if file already appends an iterator.
+      // Remove extension
+      var s = inputFilename.Remove(inputFilename.Length - 5);
+
+      var i = 0;
+      var list = s.Split('_');
+      var isIterator = int.TryParse(list[list.Length],out i);
+
+      if (isIterator)
+      {
+        //bump number
+        i++;
+      }
+      list[list.Length] = i.ToString();
+      newFileName =  list.ToString();
+    }
+
+    private void LogFailedFile(string newFileName)
+    {
+     
+    }
+
+    private void DumpPanelScheduleData()
         {
 
             DumpSectionData(m_psView, SectionType.Header);
