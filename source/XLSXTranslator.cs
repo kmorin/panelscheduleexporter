@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
+using Autodesk.Revit.UI;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 
@@ -52,8 +54,8 @@ namespace PanelScheduleExporter
                     }
                     catch {
                         LogFailedFile(newFileName);
-            //Failed to delete the file, so just append and integer
-            SetNewFileName(newFileName, out newFileName);
+                        //Failed to delete the file, so just append and integer
+                        //SetNewFileName(newFileName, out newFileName);
                     }
                 }
             }
@@ -106,22 +108,28 @@ namespace PanelScheduleExporter
       // Remove extension
       var s = inputFilename.Remove(inputFilename.Length - 5);
 
-      var i = 0;
-      var list = s.Split('_');
-      var isIterator = int.TryParse(list[list.Length],out i);
+      var i = 1;
+      var isIterator = false;
+      var list = s.Split('_').ToList();
+      if (list.Count > 1)
+      {
+        isIterator = int.TryParse(list.Last(), out i);
+      }
 
       if (isIterator)
       {
         //bump number
         i++;
       }
-      list[list.Length] = i.ToString();
-      newFileName =  list.ToString();
+      list.Add(i.ToString());
+
+      //Set the new fileName
+      newFileName = string.Join("_", list) + ".xlsx";
     }
 
     private void LogFailedFile(string newFileName)
     {
-     
+      TaskDialog.Show("Failed", $"Failed to overwrite existing file: {newFileName} \nPlease make to close the worksheet.", TaskDialogCommonButtons.Ok);
     }
 
     private void DumpPanelScheduleData()

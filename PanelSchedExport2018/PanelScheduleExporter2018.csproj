@@ -152,7 +152,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>"Z:\panelschedexport\packages\ILMerge.2.14.1208\tools\ILMerge.exe" /log:log.txt /lib:"$(SolutionDir)revit-references\Revit 2018" /out:$(TargetDir)PSE.dll $(TargetPath) $(TargetDir)EPPlus.dll</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)packages\ILMerge.2.14.1208\tools\ILMerge.exe" /log:log.txt /lib:"$(SolutionDir)revit-references\Revit 2018" /out:$(TargetDir)PSE.dll $(TargetPath) $(TargetDir)EPPlus.dll</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
