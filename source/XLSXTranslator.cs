@@ -34,7 +34,7 @@ namespace PanelScheduleExporter
         {
       //_panel = fi;
       //string excelTemplate = assemblyName.Replace("PanelSchedule.dll", "panelSchedTemplate.xlsx");
-#if REVIT2019 || REVIT2020
+#if REVIT2019 || REVIT2020 || REVIT2021
       string viewName = m_psView.Name;
 #else
       string viewName = m_psView.ViewName;

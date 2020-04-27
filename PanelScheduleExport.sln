@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PanelScheduleExporter2019",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PanelScheduleExporter2020", "PanelSchedExport2020\PanelScheduleExporter2020.csproj", "{9963C8C4-753F-4DEB-9DDF-C6C6FEFC6BD7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PanelScheduleExporter2021", "PanelSchedExport2021\PanelScheduleExporter2021.csproj", "{B96E83F9-364F-4DAB-93D8-619F1DA104E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,18 @@ Global
 		{9963C8C4-753F-4DEB-9DDF-C6C6FEFC6BD7}.Debug2019|Any CPU.Build.0 = Debug|Any CPU
 		{9963C8C4-753F-4DEB-9DDF-C6C6FEFC6BD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9963C8C4-753F-4DEB-9DDF-C6C6FEFC6BD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B96E83F9-364F-4DAB-93D8-619F1DA104E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B96E83F9-364F-4DAB-93D8-619F1DA104E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B96E83F9-364F-4DAB-93D8-619F1DA104E5}.Debug2015|Any CPU.ActiveCfg = Debug|Any CPU
+		{B96E83F9-364F-4DAB-93D8-619F1DA104E5}.Debug2015|Any CPU.Build.0 = Debug|Any CPU
+		{B96E83F9-364F-4DAB-93D8-619F1DA104E5}.Debug2017|Any CPU.ActiveCfg = Debug|Any CPU
+		{B96E83F9-364F-4DAB-93D8-619F1DA104E5}.Debug2017|Any CPU.Build.0 = Debug|Any CPU
+		{B96E83F9-364F-4DAB-93D8-619F1DA104E5}.Debug2018|Any CPU.ActiveCfg = Debug|Any CPU
+		{B96E83F9-364F-4DAB-93D8-619F1DA104E5}.Debug2018|Any CPU.Build.0 = Debug|Any CPU
+		{B96E83F9-364F-4DAB-93D8-619F1DA104E5}.Debug2019|Any CPU.ActiveCfg = Debug|Any CPU
+		{B96E83F9-364F-4DAB-93D8-619F1DA104E5}.Debug2019|Any CPU.Build.0 = Debug|Any CPU
+		{B96E83F9-364F-4DAB-93D8-619F1DA104E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B96E83F9-364F-4DAB-93D8-619F1DA104E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
