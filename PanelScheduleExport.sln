@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PanelScheduleExporter2020",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PanelScheduleExporter2021", "PanelSchedExport2021\PanelScheduleExporter2021.csproj", "{B96E83F9-364F-4DAB-93D8-619F1DA104E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PanelScheduleExporter.UI", "PanelScheduleExporter.UI\PanelScheduleExporter.UI.csproj", "{CF6C0532-9D0D-446A-9BCD-1DAE710B23DA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,18 +69,6 @@ Global
 		{B96E83F9-364F-4DAB-93D8-619F1DA104E5}.Debug2019|Any CPU.Build.0 = Debug|Any CPU
 		{B96E83F9-364F-4DAB-93D8-619F1DA104E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B96E83F9-364F-4DAB-93D8-619F1DA104E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CF6C0532-9D0D-446A-9BCD-1DAE710B23DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF6C0532-9D0D-446A-9BCD-1DAE710B23DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF6C0532-9D0D-446A-9BCD-1DAE710B23DA}.Debug2015|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF6C0532-9D0D-446A-9BCD-1DAE710B23DA}.Debug2015|Any CPU.Build.0 = Debug|Any CPU
-		{CF6C0532-9D0D-446A-9BCD-1DAE710B23DA}.Debug2017|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF6C0532-9D0D-446A-9BCD-1DAE710B23DA}.Debug2017|Any CPU.Build.0 = Debug|Any CPU
-		{CF6C0532-9D0D-446A-9BCD-1DAE710B23DA}.Debug2018|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF6C0532-9D0D-446A-9BCD-1DAE710B23DA}.Debug2018|Any CPU.Build.0 = Debug|Any CPU
-		{CF6C0532-9D0D-446A-9BCD-1DAE710B23DA}.Debug2019|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF6C0532-9D0D-446A-9BCD-1DAE710B23DA}.Debug2019|Any CPU.Build.0 = Debug|Any CPU
-		{CF6C0532-9D0D-446A-9BCD-1DAE710B23DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF6C0532-9D0D-446A-9BCD-1DAE710B23DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

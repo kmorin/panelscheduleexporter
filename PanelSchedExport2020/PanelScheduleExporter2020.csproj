@@ -96,8 +96,9 @@
       <Link>Form1.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\source\Form1.Designer.cs">
-      <Link>Form1.Designer.cs</Link>
+    <Compile Include="..\source\Form1.designer.cs">
+      <Link>Form1.designer.cs</Link>
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="..\source\HTMLTranslator.cs">
       <Link>HTMLTranslator.cs</Link>
@@ -121,6 +122,7 @@
   <ItemGroup>
     <EmbeddedResource Include="..\source\Form1.resx">
       <Link>Form1.resx</Link>
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="..\source\icons\panelScheduleExport.png">
       <Link>icons\panelScheduleExport.png</Link>
