@@ -25,7 +25,8 @@ namespace PanelScheduleExporter
             }
             catch (Exception ex)
             {
-                //TaskDialog.Show("Ribbon", ex.ToString());                
+              clsUtil.LogException(ex);
+              //TaskDialog.Show("Ribbon", ex.ToString());                
             }
             return Result.Succeeded;
         }
@@ -45,7 +46,7 @@ namespace PanelScheduleExporter
                 string.Concat(m_iconPath, "panelScheduleExport.png"),
                 Path.Combine(_path,_assemblyName+".dll"),
                 "PanelScheduleExporter.PanelScheduleExport",
-                "Export project Panel Schedules to Exel (XLSX) files",
+                "Export project Panel Schedules to Excel (XLSX) files",
                 "",
                 false
                 );

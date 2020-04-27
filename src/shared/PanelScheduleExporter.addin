@@ -6,6 +6,6 @@
     <FullClassName>PanelScheduleExporter.App</FullClassName>
     <ClientId>7CB61285-6DF6-46F4-A036-F9173CA546DB</ClientId>
     <VendorId>KTM</VendorId>
-    <VendorDescription>Kyle T. Morin, http://kylemorin.co</VendorDescription>
+    <VendorDescription>Kyle T. Morin, http://aecsoft.net</VendorDescription>
   </AddIn>
 </RevitAddIns>

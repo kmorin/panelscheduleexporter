@@ -41,9 +41,7 @@ namespace PanelScheduleExporter
 #endif
       string newFileName = Path.Combine(PanelScheduleExport._exportDirectory, viewName + ".xlsx");
 
-            var overwrite = false;
-
-            // Attempt to delete the file if already exists.
+      // Attempt to delete the file if already exists.
             if (File.Exists(newFileName)) {
                 try {
                     File.Delete(newFileName);

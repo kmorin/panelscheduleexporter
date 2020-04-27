@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{218F07B1-1491-4CF0-B95E-7EFD1376EA1A}</ProjectGuid>
+    <ProjectGuid>{B96E83F9-364F-4DAB-93D8-619F1DA104E5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PanelScheduleExporter</RootNamespace>
-    <AssemblyName>PanelScheduleExporter2019</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <AssemblyName>PanelScheduleExporter2021</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -19,56 +19,45 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;REVIT2019</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;REVIT2021</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>2</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Debug\PanelScheduleExporter2019.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\PanelScheduleExporter2021.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;REVIT2021</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DocumentationFile>
     </DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>
     </ApplicationIcon>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug2019|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug2019\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>bin\Debug\PanelScheduleExporter.xml</DocumentationFile>
-    <WarningLevel>2</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AdWindows, Version=2017.11.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RevitApi2019.19.2.20.24\lib\net47\AdWindows.dll</HintPath>
+    <Reference Include="AdWindows, Version=3.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RevitApi2021.21.0.0.383\lib\net48\AdWindows.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
-    <Reference Include="RevitAPI, Version=19.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\RevitApi2019.19.2.20.24\lib\net47\RevitAPI.dll</HintPath>
+    <Reference Include="RevitAPI, Version=21.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\RevitApi2021.21.0.0.383\lib\net48\RevitAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="RevitAPIUI, Version=19.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\RevitApi2019.19.2.20.24\lib\net47\RevitAPIUI.dll</HintPath>
+    <Reference Include="RevitAPIUI, Version=21.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\RevitApi2021.21.0.0.383\lib\net48\RevitAPIUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -84,58 +73,61 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UIFramework, Version=19.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\RevitApi2019.19.2.20.24\lib\net47\UIFramework.dll</HintPath>
+    <Reference Include="UIFramework, Version=21.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\RevitApi2021.21.0.0.383\lib\net48\UIFramework.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\source\App.cs">
+    <Compile Include="..\shared\App.cs">
       <Link>App.cs</Link>
     </Compile>
-    <Compile Include="..\source\AssemblyInfo.cs">
+    <Compile Include="..\shared\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\source\CSVTranslator.cs">
+    <Compile Include="..\shared\clsUtil.cs">
+      <Link>clsUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\shared\CSVTranslator.cs">
       <Link>CSVTranslator.cs</Link>
     </Compile>
-    <Compile Include="..\source\Form1.cs">
+    <Compile Include="..\shared\Form1.cs">
       <Link>Form1.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\source\Form1.designer.cs">
+    <Compile Include="..\shared\Form1.designer.cs">
       <Link>Form1.designer.cs</Link>
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="..\source\HTMLTranslator.cs">
+    <Compile Include="..\shared\HTMLTranslator.cs">
       <Link>HTMLTranslator.cs</Link>
     </Compile>
-    <Compile Include="..\source\InstanceViewCreation.cs">
+    <Compile Include="..\shared\InstanceViewCreation.cs">
       <Link>InstanceViewCreation.cs</Link>
     </Compile>
-    <Compile Include="..\source\PanelScheduleExport.cs">
+    <Compile Include="..\shared\PanelScheduleExport.cs">
       <Link>PanelScheduleExport.cs</Link>
     </Compile>
-    <Compile Include="..\source\SheetImport.cs">
+    <Compile Include="..\shared\SheetImport.cs">
       <Link>SheetImport.cs</Link>
     </Compile>
-    <Compile Include="..\source\Translator.cs">
+    <Compile Include="..\shared\Translator.cs">
       <Link>Translator.cs</Link>
     </Compile>
-    <Compile Include="..\source\XLSXTranslator.cs">
+    <Compile Include="..\shared\XLSXTranslator.cs">
       <Link>XLSXTranslator.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\source\Form1.resx">
+    <EmbeddedResource Include="..\shared\Form1.resx">
       <Link>Form1.resx</Link>
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\source\icons\panelScheduleExport.png">
+    <EmbeddedResource Include="..\shared\icons\panelScheduleExport.png">
       <Link>icons\panelScheduleExport.png</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\source\icons\panelScheduleExport_16.png">
+    <EmbeddedResource Include="..\shared\icons\panelScheduleExport_16.png">
       <Link>icons\panelScheduleExport_16.png</Link>
     </EmbeddedResource>
     <Content Include="LICENSE.txt">
@@ -143,7 +135,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\source\PanelScheduleExporter.addin">
+    <None Include="..\shared\PanelScheduleExporter.addin">
       <Link>PanelScheduleExporter.addin</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -151,7 +143,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)packages\ILMerge.2.14.1208\tools\ILMerge.exe" /log:log.txt /lib:"$(SolutionDir)packages\RevitApi2019.19.2.20.24\lib\net47" /out:$(TargetDir)PSE.dll $(TargetPath) $(TargetDir)EPPlus.dll</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)packages\ILMerge.2.14.1208\tools\ILMerge.exe" /log:log.txt /lib:"$(SolutionDir)packages\RevitApi2021.21.0.0.383\lib\net48" /out:$(TargetDir)PSE.dll $(TargetPath) $(TargetDir)EPPlus.dll</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>

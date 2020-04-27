@@ -13,8 +13,6 @@ namespace PanelScheduleExporter
         /// </summary>
         public PanelScheduleView m_psView;
 
-      public Document _doc;
-
         public abstract string Export();        
 
         /// <summary>

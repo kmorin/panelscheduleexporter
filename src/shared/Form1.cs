@@ -167,8 +167,10 @@ namespace PanelScheduleExporter
               //intProgress++;                
             }
           }
-          catch(Exception ex)
-          { }
+          catch (Exception ex)
+          {
+            clsUtil.LogException(ex);
+          }
           this.DialogResult = DialogResult.OK;
 
         }
