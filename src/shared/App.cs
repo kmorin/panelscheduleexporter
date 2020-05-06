@@ -123,7 +123,8 @@ namespace PanelScheduleExporter
                 }
 
                 m_mPushButtonData.ToolTip = toolTip;
-                m_mPushButtonData.SetContextualHelp(new ContextualHelp(ContextualHelpType.Url, "https://apps.autodesk.com/RVT/en/Detail/HelpDoc?appId=3053823727978432901&appLang=en&os=Win32_64"));
+                m_mPushButtonData.SetContextualHelp(new ContextualHelp(ContextualHelpType.Url, "https://apps.autodesk.com/RVT/en/Detail/HelpDoc?appId=3053823727978432901&appLang=en&os=Win64"));
+
 
                 //Availability?
                 if (!string.IsNullOrEmpty(pbAvail))
