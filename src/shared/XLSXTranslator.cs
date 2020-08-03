@@ -19,8 +19,7 @@ namespace PanelScheduleExporter
     private static ExcelWorksheet _ws = null;
     private int _nRows_Section;
     private int _nCols_Section;
-    private int rr = 0;
-    private int cc = 0;
+    private int _rowPointer = 1;
     //private FamilyInstance _panel = null;    
 
     public XLSXTranslator(PanelScheduleView psView, Document _doc) {
@@ -122,28 +121,25 @@ namespace PanelScheduleExporter
 
     private void DumpSectionData(PanelScheduleView psView, SectionType sectionType) {
 
-      Tuple<int,int> numRowsAndCols = getNumberOfRowsAndColumns(m_psView.Document, m_psView, sectionType); //get rows/cols for schedule section.
-      _nRows_Section = numRowsAndCols.Item1;
-      _nRows_Section = numRowsAndCols.Item2;
+      var data = psView.GetSectionData(sectionType);
+      _nRows_Section = data.NumberOfRows;
+      _nCols_Section = data.NumberOfColumns;
 
       //Existing functionality
-      for (int i = 0; i < _nRows_Section; i++) {
-        for (int j = 1; j < _nCols_Section; j++) {
+      for (int i = data.FirstRowNumber; i < _nRows_Section; i++) {
+        for (int j = data.FirstColumnNumber; j < _nCols_Section; j++) {
           try {
-            cc = j;
             _s = m_psView.GetCellText(sectionType, i, j);
             //var cellTypeIsInPhaseLoads = m_psView.IsCellInPhaseLoads(i, j);
             //var cellIsInLoadSummary = m_psView.IsColumnInLoadSummary(j);
-            var cells = m_psView;
-            int value = 0;
-            var range = _ws.Cells[rr, cc];
+            var range = _ws.Cells[_rowPointer, j];
             range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
             if (sectionType == SectionType.Body || sectionType == SectionType.Summary) {
               // Format cells for VA
               if (Regex.Match(_s, @"^[0-9]+\s(VA){1}[^a-z|A-Z]").Success) //Regex to match "## VA" cells
               {
                 _s = _s.Remove(_s.Length - 3);
-                int.TryParse(_s, out value);
+                int.TryParse(_s, out int value);
 
                 range.Style.Numberformat.Format = "0 VA";
                 range.Value = value;
@@ -152,7 +148,7 @@ namespace PanelScheduleExporter
               else if (Regex.Match(_s, @"^[0-9]+\s(A|kA|mA){1}[^a-z|A-Z]").Success) //Regex to match "## A | # kA | # mA" cells
               {
                 _s = _s.Remove(_s.Length - 2);
-                int.TryParse(_s, out value);
+                int.TryParse(_s, out int value);
                 range.Value = _s;
               }
               else {
@@ -167,7 +163,7 @@ namespace PanelScheduleExporter
             // do nothing.
           }
         }
-        rr++;
+        _rowPointer++;
       }
     }
   }
