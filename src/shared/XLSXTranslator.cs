@@ -67,16 +67,6 @@ namespace PanelScheduleExporter
           wb.Save();
         }
 
-
-        //Implement dump to excel for testing
-        //DumpPanelScheduleData();
-
-        //Resize cells
-        //MySheet.Columns.AutoFit();
-        //Save out excel to new file            
-        //MyBook.SaveAs(Path.Combine(PanelScheduleExport._exportDirectory, newFileName));
-        //MyBook.Close();
-
         //Working On portion (does nothing)??
         var psData = m_psView.GetTableData();
         int numSlots = psData.NumberOfSlots;              //Number of circuits
@@ -126,77 +116,50 @@ namespace PanelScheduleExporter
       DumpSectionData(m_psView, SectionType.Header);
       DumpSectionData(m_psView, SectionType.Body);
       DumpSectionData(m_psView, SectionType.Summary);
-      DumpSectionData(m_psView, SectionType.Footer);
-
-      //ElectricalEquipment eePanel = _panel.MEPModel as ElectricalEquipment;
-      //FilteredElementCollector fec = new FilteredElementCollector(_panel.Document)
-      //.OfCategory(BuiltInCategory.OST_ElectricalCircuit);
-
-      //ElectricalSystemSet eset = new ElectricalSystemSet();
-
-      //foreach (ElectricalSystem es in fec)
-      //{
-      //    if (es.PanelName == _panel.get_Parameter("Panel Name").ToString())
-      //    {
-      //        eset.Insert(es);
-      //    }                
-      //}            
+      DumpSectionData(m_psView, SectionType.Footer);      
 
     }
 
     private void DumpSectionData(PanelScheduleView psView, SectionType sectionType) {
-      _nRows_Section = 0;
-      _nRows_Section = 0;
 
-      getNumberOfRowsAndColumns(m_psView.Document, m_psView, sectionType, ref _nRows_Section, ref _nCols_Section); //get rows/cols for schedule section.
-
-      //Header Section
-
-      //Body Section
-
-      //Summary
-
-      //Footer
+      Tuple<int,int> numRowsAndCols = getNumberOfRowsAndColumns(m_psView.Document, m_psView, sectionType); //get rows/cols for schedule section.
+      _nRows_Section = numRowsAndCols.Item1;
+      _nRows_Section = numRowsAndCols.Item2;
 
       //Existing functionality
-      for (int i = 0; i < _nRows_Section; ++i) {
-        for (int j = 0; j < _nCols_Section; ++j) {
+      for (int i = 0; i < _nRows_Section; i++) {
+        for (int j = 1; j < _nCols_Section; j++) {
           try {
-            cc = j; //set excel column equal to schedule column
+            cc = j;
             _s = m_psView.GetCellText(sectionType, i, j);
-            var cellTypeIsInPhaseLoads = m_psView.IsCellInPhaseLoads(i, j);
-            var cellIsInLoadSummary = m_psView.IsColumnInLoadSummary(j);
+            //var cellTypeIsInPhaseLoads = m_psView.IsCellInPhaseLoads(i, j);
+            //var cellIsInLoadSummary = m_psView.IsColumnInLoadSummary(j);
             var cells = m_psView;
             int value = 0;
             var range = _ws.Cells[rr, cc];
             range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
-            // Format cells for VA
-            if (Regex.Match(_s, @"^[0-9]+\s(VA){1}[^a-z|A-Z]").Success) //Regex to match "## VA" cells
-            {
-              _s = _s.Remove(_s.Length - 3);
-              int.TryParse(_s, out value);
+            if (sectionType == SectionType.Body || sectionType == SectionType.Summary) {
+              // Format cells for VA
+              if (Regex.Match(_s, @"^[0-9]+\s(VA){1}[^a-z|A-Z]").Success) //Regex to match "## VA" cells
+              {
+                _s = _s.Remove(_s.Length - 3);
+                int.TryParse(_s, out value);
 
-              range.Style.Numberformat.Format = "0 VA";
-              //MySheet.Cells[rr, cc] = value;                            
-              range.Value = value;
-            }
-            //BUGFIX: 1 - make sure no trailing chars before or after.
-            else if (Regex.Match(_s, @"^[0-9]+\s(A|kA|mA){1}[^a-z|A-Z]").Success) //Regex to match "## A | # kA | # mA" cells
-            {
-              _s = _s.Split(' ')[0];
-              int.TryParse(_s, out value);
-              if (value > 0) {
-                range.Style.Numberformat.Format = "0 A";
-                //MySheet.Cells[rr, cc] = value;                            
+                range.Style.Numberformat.Format = "0 VA";
                 range.Value = value;
               }
-              //otherwise, just dump string.
+              //BUGFIX: 1 - make sure no trailing chars before or after.
+              else if (Regex.Match(_s, @"^[0-9]+\s(A|kA|mA){1}[^a-z|A-Z]").Success) //Regex to match "## A | # kA | # mA" cells
+              {
+                _s = _s.Remove(_s.Length - 2);
+                int.TryParse(_s, out value);
+                range.Value = _s;
+              }
               else {
                 range.Value = _s;
               }
             }
             else {
-              //MySheet.Cells[rr, cc] = _s;       
               range.Value = _s;
             }
           }
@@ -204,7 +167,7 @@ namespace PanelScheduleExporter
             // do nothing.
           }
         }
-        rr++; //increment excel row   
+        rr++;
       }
     }
   }
