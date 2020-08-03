@@ -65,11 +65,11 @@ namespace PanelScheduleExporter
         /// <param name="sectionType">which section is exporting, it can be Header, Body, Summary or Footer.</param>
         private void DumpSectionData(StreamWriter sw, PanelScheduleView psView, SectionType sectionType)
         {
-            int nRows_Section = 0;
-            int nCols_Section = 0;
-            getNumberOfRowsAndColumns(m_psView.Document, m_psView, sectionType, ref nRows_Section, ref nCols_Section);
+            Tuple<int,int> numRowsAndCols = getNumberOfRowsAndColumns(m_psView.Document, m_psView, sectionType);
+      int nRows_Section = numRowsAndCols.Item1;
+      int nCols_Section = numRowsAndCols.Item2;
 
-            for (int ii = 0; ii < nRows_Section; ++ii)
+      for (int ii = 0; ii < nRows_Section; ++ii)
             {
                 StringBuilder oneRow = new StringBuilder();
                 for (int jj = 0; jj < nCols_Section; ++jj)

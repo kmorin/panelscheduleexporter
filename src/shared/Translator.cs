@@ -1,3 +1,4 @@
+using System;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
 
@@ -39,18 +40,18 @@ namespace PanelScheduleExporter
         /// <param name="doc">Revit document.</param>
         /// <param name="psView">the exporting panel schedule view</param>
         /// <param name="sectionType">the exporting section of the panel schedule.</param>
-        /// <param name="nRows">the number of rows.</param>
-        /// <param name="nCols">the number of columns.</param>
-        protected void getNumberOfRowsAndColumns(Autodesk.Revit.DB.Document doc, PanelScheduleView psView, SectionType sectionType, ref int nRows, ref int nCols)
+        /// <returns><!--<rows,cols>--></returns>
+        protected Tuple<int,int> getNumberOfRowsAndColumns(Autodesk.Revit.DB.Document doc, PanelScheduleView psView, SectionType sectionType)
         {
             var openSectionData = new Transaction(doc, "openSectionData");
             openSectionData.Start();
 
             TableSectionData sectionData = psView.GetSectionData(sectionType);
-            nRows = sectionData.NumberOfRows;
-            nCols = sectionData.NumberOfColumns;
+            var nRows = sectionData.NumberOfRows;
+            var nCols = sectionData.NumberOfColumns;
 
             openSectionData.RollBack();
+            return new Tuple<int, int>(nRows, nCols);
         }
     }
 }
